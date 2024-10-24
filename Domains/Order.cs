@@ -5,12 +5,12 @@ namespace ClassLibrary1;
 public class Order : IAuditable
 {
     public int Id { get; set; }
-    public decimal BasePrice { get; internal set; }
     public decimal FinalPrice { get; internal set; }
 
-    //ta sekcja własciowosci została powtorzona aby uniknac zmian wstecznych w zamowieniach gdyby ktos zmienił wartosci w FlightDeparture
+    //ta sekcja własciowości została powtórzona aby uniknąć zmian wstecznych w zamówieniach gdyby ktoś zmienił wartości w FlightDeparture
     public int CurrencyId { get; internal set; }
     public Currency Currency { get; internal set; }
+    public decimal BasePrice { get; internal set; }
 
     public DayOfWeek DayOfWeek { get; internal set; }
     public DateTime Hour { get; internal set; }
@@ -47,9 +47,9 @@ public class Order : IAuditable
         var discountsUsed = new List<Discount>();
         foreach (var discount in discountList)
         {
-            var difference = finalPrice - discount.Value;
-            if (difference < 20)
+            if (finalPrice - discount.Value < 20)
                 break;
+
             finalPrice -= discount.Value;
             discountsUsed.Add(discount);
         }
